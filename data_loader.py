@@ -16,9 +16,15 @@ image_folder = "classification/resized_train"
 fs = gcsfs.GCSFileSystem()
 
 def load_labels():
-    '''Load CSV from GCS and group labels'''
+
+    # Two different to load csv
+    # Load CSV from GCS'''
+    '''
     with fs.open(csv_path) as f:
         df = pd.read_csv(f)
+    '''
+    # Load csv from local
+    df = pd.read_csv("trainLabels.csv")
     
     # Change 0=>Normal(0) 1,2=>Mild(1), 3,4=>Servere(2)
     # Map labels
@@ -51,10 +57,15 @@ class GCSImageData(Dataset):
         # Ensure label is an integer (in case of float)
         label = int(label)
 
+        # Two ways to load image
         # Read images from GCS
+        '''
         image_path = f"{self.bucket_name}/{self.folder_path}/{image_name}.jpeg"
         with self.fs.open(image_path, "rb") as f:
             image = Image.open(io.BytesIO(f.read())).convert("RGB")
+        '''
+        # Read images from local
+        image = Image.open(f"resized_train/{image_name}.jpeg").convert("RGB")
 
         # Apply transformations
         if self.transform:

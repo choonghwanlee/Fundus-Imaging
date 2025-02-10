@@ -11,11 +11,6 @@ import numpy as np
 from torch.utils.data import DataLoader, WeightedRandomSampler
 
 
-from torchvision import transforms
-
-
-
-
 def get_class_weights(train_loader):
     # Get the class distribution
     class_counts = np.zeros(3)  # Assuming 3 classes
@@ -65,11 +60,12 @@ def get_model(model_name="resnet18"):
         model = models.vgg16(pretrained=True)
         model.classifier[6] = nn.Sequential(
             nn.Linear(model.classifier[6].in_features, 512),
-            nn.BatchNorm1d(512),  # Add BatchNorm
+            nn.BatchNorm1d(512),  
             nn.ReLU(),
             nn.Dropout(0.5),
             nn.Linear(512, 3)
         )
+
     elif model_name == "densenet121":
         model = models.densenet121(pretrained=True)
         model.classifier = nn.Sequential(
@@ -82,15 +78,6 @@ def get_model(model_name="resnet18"):
     else:
         raise ValueError(f"Model {model_name} not recognized")
     
-    '''
-    # Adjust the final fully connected layer
-    if "resnet" in model_name:
-        model.fc = nn.Linear(model.fc.in_features, 3)
-    elif "vgg" in model_name:
-        model.classifier[6] = nn.Linear(model.classifier[6].in_features, 3)
-    elif "densenet" in model_name:
-        model.classifier = nn.Linear(model.classifier.in_features, 3)
-    '''
     return model.to(device)
 
 def train_model(model, train_loader, val_loader, test_loader, optimizer, criterion, num_epochs=6,patience=2):
@@ -145,7 +132,7 @@ def train_model(model, train_loader, val_loader, test_loader, optimizer, criteri
         
         print(f"Epoch [{epoch+1}/{num_epochs}] - Train Loss: {avg_train_loss:.4f}, Val Loss: {avg_val_loss:.4f}")
 
-        # Early stopping logic
+        # Early stopping
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
             patience_counter = 0  # Reset patience counter
@@ -172,7 +159,7 @@ def evaluate_model(model, test_loader):
     return f1
 
 def fine_tune_model(model, model_name):
-    # Freeze all layers except the fully connected (fc) layer
+    # Freeze all layers except the fully connected layer
     for param in model.parameters():
         param.requires_grad = False
     
@@ -188,7 +175,6 @@ def fine_tune_model(model, model_name):
 
 def train_and_evaluate_all_models(train_loader, val_loader,test_loader, model_names=["vgg16","densenet121","resnet18"]):
     best_f1 = 0
-    best_model = None
     best_model_name = ""
 
     # Dictionary to store F1 scores
@@ -199,8 +185,8 @@ def train_and_evaluate_all_models(train_loader, val_loader,test_loader, model_na
     # Set up the loss function
     criterion = nn.CrossEntropyLoss()
     
-    # Specify the directory on your local machine to save models
-    model_save_path = "./models"  # Modify this path if needed
+    # Specify the directory to save models
+    model_save_path = "./models"  
     os.makedirs(model_save_path, exist_ok=True)  # Create the directory if it doesn't exist
     
     # Store the models to save all of them
@@ -248,7 +234,6 @@ def train_and_evaluate_all_models(train_loader, val_loader,test_loader, model_na
         # Update best model if necessary
         if f1 > best_f1:
             best_f1 = f1
-            best_model = model
             best_model_name = model_name
 
         # Store loaded/trained model
@@ -263,21 +248,6 @@ def train_and_evaluate_all_models(train_loader, val_loader,test_loader, model_na
 
     return saved_models, loss_dict, model_f1_scores
 
-def plot_loss_curves(loss_dict):
-    for model_name, losses in loss_dict.items():
-        train_loss = losses["train_loss"]
-        test_loss = losses["test_loss"]
-        epochs = range(1, len(train_loss) + 1)
-
-        plt.figure(figsize=(8, 5))
-        plt.plot(epochs, train_loss, label="Training Loss", marker='o')
-        plt.plot(epochs, test_loss, label="Validation Loss", marker='o')
-        plt.xlabel("Epochs")
-        plt.ylabel("Loss")
-        plt.title(f"Loss Curve for {model_name}")
-        plt.legend()
-        plt.grid(True)
-        plt.show()
 
 
 if __name__ == "__main__":
@@ -294,6 +264,7 @@ if __name__ == "__main__":
     # Create the oversampled train loader
     oversampled_train_loader = get_oversampled_train_loader(train_loader, class_weights)
     print("traing start")
+    
     # Train and evaluate all models
     saved_models, loss_dict, model_f1_scores = train_and_evaluate_all_models(oversampled_train_loader, val_loader, test_loader)
 
@@ -301,4 +272,3 @@ if __name__ == "__main__":
     print("\nF1 Scores for all models:")
     for model_name, f1 in model_f1_scores.items():
         print(f"{model_name}: {f1:.4f}")
-    #plot_loss_curves(loss_dict)

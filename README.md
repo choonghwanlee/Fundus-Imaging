@@ -131,4 +131,4 @@ Preliminary results indicate that our classification algorithm may learn spuriou
 
 # Application
 
-**(Yiqing pastes the link)**
+[**(DR-Detect-Model)**](https://huggingface.co/spaces/yiqing111/DR-detect)

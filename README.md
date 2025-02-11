@@ -11,7 +11,7 @@ Before you begin, make sure you have:
 To authenticate your Google Cloud account, run the following command:
 ```bash
 gcloud auth login
-
+```
 
 ## Data Structure
 - `trainLabels.csv`: CSV file containing image names and corresponding labels.

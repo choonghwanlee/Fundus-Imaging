@@ -30,7 +30,7 @@ This project aims to develop a predictive model for detecting diabetic retinopat
 ## Prerequisites
 
 Before you begin, make sure you have:
-1. **Google Cloud SDK** installed. If not, [download it here](https://cloud.google.com/sdk/docs/install).
+**Google Cloud SDK** installed. If not, [download it here](https://cloud.google.com/sdk/docs/install).
 
 ## Step 1: Authenticate with Google Cloud
 To authenticate your Google Cloud account, run the following command:

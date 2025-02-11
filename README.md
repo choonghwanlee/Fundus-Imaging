@@ -1,8 +1,9 @@
 # Fundus Image Prediction for Diabetic Retinopathy
 
 # 0. Project Overview
-This project aims to develop a predictive model for detecting diabetic retinopathy (DR) from fundus images, using three distinct approaches: a **basic Naive Mean model**, **non-deep learning model**, and **deep learning-based models**. The project involves image classification across three levels of labels:
+This project aims to develop a predictive model for detecting diabetic retinopathy (DR) from fundus images, using three distinct approaches: a **basic Naive Mean model**, **non-deep learning model**, and **deep learning-based models**. 
 
+The project involves image classification across three levels of labels:
 - 0: Normal
 - 1: Mild Diabetic Retinopathy
 - 2: Severe Diabetic Retinopathy

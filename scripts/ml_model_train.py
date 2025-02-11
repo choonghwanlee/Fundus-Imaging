@@ -37,31 +37,31 @@ def iterative_thresholding(image: np.ndarray):
     Returns:
     - binary_image (np.ndarray): binary image with pixel values 0 or 255
     """
-    # Normalize the intensity values to [0, 1]
+    # normalize intensity values
     image_normalized = image / 255.0
     
-    # Initial threshold: half of the maximum dynamic range (0.5 for normalized image)
+    # initial threshold
     threshold = 0.5
     
     while True:
-        # Separate foreground and background based on current threshold
+        # separate foreground and background
         foreground = image_normalized[image_normalized >= threshold]
         background = image_normalized[image_normalized < threshold]
         
-        # Compute the sample means for foreground and background
+        # compute sample means for foreground and background
         mean_foreground = np.mean(foreground) if foreground.size > 0 else 0
         mean_background = np.mean(background) if background.size > 0 else 0
         
-        # Compute the new threshold
+        # new threshold
         new_threshold = (mean_foreground + mean_background) / 2
         
-        # Break if threshold convergence is achieved
+        # break if threshold convergence is achieved
         if np.abs(new_threshold - threshold) < 1e-5:
             break
         
         threshold = new_threshold
 
-    # Apply the final threshold to generate the binary image
+    # apply the final threshold to generate the binary image
     binary_image = (image_normalized >= threshold).astype(np.uint8) * 255
     
     return binary_image
@@ -75,21 +75,16 @@ def remove_small_clusters(binary_image, min_size=20):
     - binary_image (np.array): binary image with pixel values 0 or 255    
     """
 
-    # Step 1: Label connected components
+    # label connected components
     num_labels, labels = cv2.connectedComponents(binary_image)
 
-    # Step 2: Create a new image to store the filtered components
+    # create a new image to store the filtered components
     filtered_image = np.zeros_like(binary_image)
 
-    # Step 3: Iterate through the components and check the size
+    # itearate through the components and check the size
     for label in range(1, num_labels):  # Start from 1 to ignore the background (label 0)
-        # Create a mask for the current component
         component_mask = (labels == label)
-
-        # Count the number of white pixels in the component
         component_size = np.sum(component_mask)
-
-        # Step 4: If the component size is larger than min_size, keep it in the filtered image
         if component_size > min_size:
             filtered_image[component_mask] = 255  # Set the corresponding pixels to white
 

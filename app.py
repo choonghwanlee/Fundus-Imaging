@@ -7,6 +7,7 @@ import numpy as np
 from torchvision import transforms
 from models.model import NaiveModel, ClassicalModel, DeepLearningModel
 import joblib
+from scripts.xai_eval import convert_to_gradcam
 
 # Bucket name
 BUCKET_NAME = "aipi540-cv"
@@ -24,7 +25,7 @@ class ModelHandler:
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], 
-                               std=[0.229, 0.224, 0.225])
+                               std=[0.229, 0.224, 0.225]) ## I think this is out of date slightly? at least with what VGG uses
         ])
     # Preprocess the image
     def preprocess_image(self, image):
@@ -55,7 +56,7 @@ def load_model(model_type):
     return model, handler.preprocess_image
 
 # Prediction function
-def predict(model, image_tensor, model_type):
+def predict(model, image_tensor, model_type, with_xai = False):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     with torch.no_grad():
         image_tensor = image_tensor.to(device)
@@ -71,8 +72,13 @@ def predict(model, image_tensor, model_type):
         predicted_class = torch.argmax(probabilities, dim=1).item()
         class_probabilities = probabilities[0].cpu().numpy()
     
+        if with_xai: 
+            cam = convert_to_gradcam(model)
+            heatmap = cam(input_tensor = image_tensor, targets = None)
+            return predicted_class, class_probabilities, heatmap
     
     return predicted_class, class_probabilities
+
 
 # the streamlit app
 def main():
@@ -124,14 +130,15 @@ def main():
                 processed_image = preprocess(image)
                 
                 with st.spinner("Analyzing image..."):
-                    predicted_class, probabilities = predict(model, processed_image, model_type)
+                    result = predict(model, processed_image, model_type)
                     
                 st.success("Analysis Complete!")
                 
                 st.header("Prediction Results")
-                st.write(f"**Predicted Condition:** {class_names[predicted_class]}")
+                st.write(f"**Predicted Condition:** {class_names[result[0]]}")
                 st.write("**Class Probabilities:**")
-                st.json(probabilities)
+                st.json(result[1])
+                ### TO-DO: conditionally handle display of gradcam heatmap (result[2] if it exists) ###
                 
                 
             except Exception as e:

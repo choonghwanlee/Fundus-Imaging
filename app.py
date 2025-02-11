@@ -5,7 +5,7 @@ import torch.nn as nn
 from PIL import Image
 import numpy as np
 from torchvision import transforms
-from models.model import DeepLearningModel
+from scripts.model import DeepLearningModel
 import joblib
 from scripts.xai_eval import convert_to_gradcam
 import cv2

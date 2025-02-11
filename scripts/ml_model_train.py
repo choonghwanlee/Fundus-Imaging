@@ -149,10 +149,9 @@ def train_random_forest(X_train, y_train):
     """
     Train a Random Forest model on the training dataset, using hyperparameter tuning
 
-    The range of values for the grid search was narrowed down via random search in a jupyter notebook
+    The range of values for the grid search was narrowed down via a preliminary random search in a jupyter notebook
 
     """
-
     # # of trees in random forest
     n_estimators = [400,431,450]
     # max #s of levels in tree

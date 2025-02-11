@@ -4,7 +4,7 @@ import os
 from collections import Counter
 import numpy as np
 from sklearn.metrics import f1_score
-from data_loader import get_dataloaders, load_labels
+from data_loader_local import get_dataloaders, load_labels
 
 def calculate_native_distribution():
 

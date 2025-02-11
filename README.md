@@ -13,13 +13,13 @@ The project involves image classification across three levels of labels:
 ## Key Features
 
 - **Model Approaches:**
-  - **Naive Mean Model:** A basic baseline model that uses statistical averages for prediction. (**Yiqing checks if this description is right for ur model**)
-  - **Non-Deep Learning Models:** A traditional machine learning model that doesn't rely on deep learning techniques.(**Jason fills out models u use**)
+  - **Naive Mean Model:** A basic baseline model that uses statistical averages for prediction.
+  - **Non-Deep Learning Models:** A traditional machine learning model that doesn't rely on deep learning techniques. We use a combination of feature extraction using GLCM and a Random Forest model to train our model.
   - **Deep Learning Models:**
     - **VGG:** A convolutional neural network (CNN) with a simple architecture, known for its deep structure and great accuracy in image classification.
     - **ResNet:** A residual network that uses skip connections to address the vanishing gradient problem and improve model performance.
     - **DenseNet:** A densely connected convolutional network that improves efficiency by connecting each layer to every other layer in a feed-forward manner.
-- **Explainable AI (XAI):** To enhance model interpretability, the project integrates XAI techniques, allowing users to understand how predictions are made, fostering trust and transparency in the decision-making process.
+- **Explainable AI (XAI):** To enhance model interpretability, the project integrates XAI techniques, allowing users to understand how predictions are made, fostering trust and transparency in the decision-making process. Specifically, we use the Grad-CAM algorithm to visusalize pixel attributions.
 - **Real-World Application:** A user-friendly web application where users can upload their fundus images and get real-time predictions on the severity of diabetic retinopathy.
 
 ## Evaluation Metric: F1 Score
@@ -33,7 +33,14 @@ Due to the class imbalance in our dataset, we chose the F1 score as our evaluati
 - Create venv `python -m venv .venv`
 - Activate venv `source .venv/bin/activate`
 - Install packages `pip install -r requirements.txt`
-- **(how to run the scripts)(Jason fills out after u reformat the files)**
+
+To run the Streamlit demo locally, run `python app.py`
+
+To train or evaluate models separately, first `cd scripts`. Then, you can run the following:
+
+1. For training ML model: `python ml_model_train.py`
+2. For training DL model: `python deep_learning_training.py`
+3. To evaluate DL model with XAI: `python xai_eval.py`
 
 # 2. Data Downloading from Google Cloud Storage (GCS)
 
@@ -79,8 +86,6 @@ The final F1 score is 0.6235
 For our choice of ML, the most important aspect is feature engineering & extraction. Given existing literature, we focused our image processing efforts on segmenting lesions and keypoints in a fundus image. This removes variability from different lighting and noise in teh image, allowing us to retain only the most relevant features for our model.
 
 Our image processing pipeline consists of 8 different steps: 1. grayscaling 2. contrast enhancement 3. blurring 4. difference/subtraction 5. binary thresholding 6. noise removal 7. obtain complementary image 8. overlaying image
-
-INSERT IMAGES HERE
 
 After finding relevant regions, we then pass the final segmented image to a GLCM algorithm which produces Haralick Texture features (entropy, energy, contrast, etc.) as inputs to our ML classification model.
 

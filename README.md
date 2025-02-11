@@ -26,10 +26,9 @@ This project aims to develop a predictive model for detecting diabetic retinopat
 - Install packages `pip install -r requirements.txt`
 - **(not sure for running)**
 
-# 2. Data Downloading
+# 2. Data Downloading from Google Cloud Storage (GCS)
 ## Prerequisites
-
-Before you begin, make sure you have:
+Before you begin, make sure you have
 **Google Cloud SDK** installed. If not, [download it here](https://cloud.google.com/sdk/docs/install).
 
 ## Step 1: Authenticate with Google Cloud
@@ -62,15 +61,25 @@ gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
 **(Jason)**
 
 ## 3. Deep Learning Models
-## Data Loading
-## Get Data from Google Cloud Storage (GCS)
-
-
 
 ## Data Sourcing and Processing Pipeline
 - **Load Labels**: Reads `trainLabels.csv` and maps labels to corresponding categories.
-- **Define Dataset**: Uses `LocalImageDataset` class to load images and their labels.
+- **Define Dataset**: Uses `LocalImageDataset` class to load images and match them with their labels.
 - **Compute Mean and Standard Deviation**: Calculates dataset mean and standard deviation for normalization.
 - **Create Dataloaders**: Splits dataset into training, validation, and test sets, then creates DataLoaders for batch processing.
 - **Run the Script**: Executes the script to check the output batch shape.
+  
+## Data Preprocessing
+To prevent overfitting and ensure better generalization, the following techniques were applied:
+- **Oversampling** is applied to balance class distribution during training.
+- **Batch Normalization** and **Dropout** are used to prevent overfitting
+- **Early Stopping** is implemented to halt training when validation loss doesn't improve for a specified number of epochs.
+- **Adam Optimizer** with learning rate of 0.0001 and weight decay (1e-5) is used for optimization.
+
+## Models
+- **ResNet18**
+- **VGG16**
+- **DenseNet121** 
+
+
 

@@ -101,11 +101,10 @@ def main():
     st.title("👁️ Diabetic Retinopathy Detection System")
     st.write("Upload a fundus image to detect diabetic retinopathy severity")
 
-    # 只加载 Deep Learning Model (VGG16)
+    
     st.sidebar.header("Model Information")
     st.sidebar.write("Using Deep Learning Model (VGG16)")
 
-    # 加载 Deep Learning Model
     model, preprocess = load_model("Deep Learning Model")
 
     st.sidebar.header("About")
@@ -145,7 +144,7 @@ def main():
                 st.write("**Class Probabilities:**")
                 st.json({class_names[i]: float(class_probs[i]) for i in range(len(class_probs))})
 
-                # *
+                # Generate and display Grad-CAM heatmap
                 with st.spinner("Generating XAI..."):
                     heatmap = generate_gradcam(model, processed_image)
 

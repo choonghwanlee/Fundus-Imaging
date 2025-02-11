@@ -8,14 +8,15 @@ This project aims to develop a predictive model for detecting diabetic retinopat
 - 2: Severe Diabetic Retinopathy
 
 ### Key Features
-- Model Approaches:
-    - Naive Mean Model: A basic baseline model that uses statistical averages for prediction.
-    - Non-Deep Learning Models: A traditional machine learning model that doesn't rely on deep learning techniques.(**Jason fills out models u use)
-    - Deep Learning Models: 
-        - VGG: A convolutional neural network (CNN) with a simple architecture, known for its deep structure and great accuracy in image classification.
-        - ResNet: A residual network that uses skip connections to address the vanishing gradient problem and improve model performance.
-        - DenseNet: A densely connected convolutional network that improves efficiency by connecting each layer to every other layer in a feed-forward manner.
-
+- **Model Approaches:**
+    - **Naive Mean Model:** A basic baseline model that uses statistical averages for prediction.
+    - **Non-Deep Learning Models:** A traditional machine learning model that doesn't rely on deep learning techniques.(**Jason fills out models u use**)
+    - **Deep Learning Models:** 
+        - **VGG:** A convolutional neural network (CNN) with a simple architecture, known for its deep structure and great accuracy in image classification.
+        - **ResNet:** A residual network that uses skip connections to address the vanishing gradient problem and improve model performance.
+        - **DenseNet:** A densely connected convolutional network that improves efficiency by connecting each layer to every other layer in a feed-forward manner.
+- **Explainable AI (XAI):** To enhance model interpretability, the project integrates XAI techniques, allowing users to understand how predictions are made, fostering trust and transparency in the decision-making process.
+- **Real-World Application:** A user-friendly web application where users can upload their fundus images and get real-time predictions on the severity of diabetic retinopathy.
 ## Get Data from Google Cloud Storage (GCS)
 
 ### Prerequisites

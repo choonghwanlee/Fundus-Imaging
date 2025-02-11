@@ -13,7 +13,7 @@ The project involves image classification across three levels of labels:
 ## Key Features
 
 - **Model Approaches:**
-  - **Naive Mean Model:** A basic baseline model that uses statistical averages for prediction. (**Yiqing checks if this description is right for ur model**)
+  - **Naive Mean Model:** A simple baseline model that calculates the class distribution of the dataset, assuming all predictions follow this natural distribution. The model selects the most frequent class as its prediction, evaluates its performance using the F1 score.
   - **Non-Deep Learning Models:** A traditional machine learning model that doesn't rely on deep learning techniques.(**Jason fills out models u use**)
   - **Deep Learning Models:**
     - **VGG:** A convolutional neural network (CNN) with a simple architecture, known for its deep structure and great accuracy in image classification.

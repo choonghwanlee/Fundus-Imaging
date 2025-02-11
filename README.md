@@ -22,7 +22,7 @@ The project involves image classification across three levels of labels:
 ## Evaluation Metric: F1 Score
 Due to the class imbalance in our dataset, we chose the F1 score as our evaluation metric. The F1 score is particularly effective in this context because it provides a balance between precision and recall, which is crucial when dealing with imbalanced data. By optimizing for F1 score, we ensure that the model is not biased toward the majority class and can effectively classify samples from all classes, providing a more reliable performance measure in the presence of data imbalance.
 
-![Label Distribution](https://www.imghippo.com/i/xEgx2063zzk.png)
+![Label Distribution](https://i.imghippo.com/files/xEgx2063zzk.png)
 
 
 

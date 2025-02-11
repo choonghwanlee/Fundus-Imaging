@@ -13,6 +13,19 @@ To authenticate your Google Cloud account, run the following command:
 gcloud auth login
 ```
 
+### Step 2: Download Data from GCS
+To download data from Google Cloud Storage, use the gsutil command. 
+
+```bash
+gsutil cp gs://aipi540-cv/classification/trainLabels.csv ./trainLabels.csv
+```
+
+```bash
+gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
+```
+
+
+
 ## Data Structure
 - `trainLabels.csv`: CSV file containing image names and corresponding labels.
 - `resized_train/`: Directory containing resized images in `.jpeg` format.

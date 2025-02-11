@@ -59,7 +59,7 @@ gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
 - `trainLabels.csv`: CSV file containing image names and corresponding labels.
 - `resized_train/`: Directory containing resized images in `.jpeg` format.
 
-# Approaches
+# 3. Approaches
 ## Naive Mean Model
 **(Yiqing)**
 
@@ -89,10 +89,10 @@ To prevent overfitting and ensure better generalization, the following technique
 | VGG16          | 0.8214       |
 | DenseNet121    | 0.7027       |
 
-# Explainable AI
+# 4. Explainable AI
 **(Jason)**
 
-# Application
+# 5. Application
 **(Yiqing pastes the link)**
 
 

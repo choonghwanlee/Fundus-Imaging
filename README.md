@@ -67,7 +67,7 @@ gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
 - `trainLabels.csv`: CSV file containing image names and corresponding labels.
 - `resized_train/`: Directory containing resized images in `.jpeg` format.
 
-# Approaches
+# 3. Approaches
 
 ## Naive Mean Model
 
@@ -118,7 +118,7 @@ To prevent overfitting and ensure better generalization, the following technique
 | VGG16       | 0.8214   |
 | DenseNet121 | 0.7027   |
 
-# Explainable AI
+# 4. Explainable AI
 
 A key motivating driver of this work is the need for explainable DR diagnoses. The use of XAI algorithms on black-box classification models allow us to explain DR severity without explicitly training a segmentation or object detection model.
 

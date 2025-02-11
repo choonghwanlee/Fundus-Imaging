@@ -28,7 +28,7 @@ Due to the class imbalance in our dataset, we chose the F1 score as our evaluati
 - Create venv `python -m venv .venv`
 - Activate venv `source .venv/bin/activate`
 - Install packages `pip install -r requirements.txt`
-- **(not sure for running)**
+- **(how to run the scripts)(Jason fills out after u reformat the files)**
 
 # 2. Data Downloading from Google Cloud Storage (GCS)
 ## Prerequisites

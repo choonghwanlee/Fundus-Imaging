@@ -152,7 +152,10 @@ def _apply_preprocessing(bucket, row, N = 8):
 
 def train_random_forest(X_train, y_train):
     """
-    
+    Train a Random Forest model on the training dataset, using hyperparameter tuning
+
+    The range of values for the grid search was narrowed down via random search in a jupyter notebook
+
     """
 
     # # of trees in random forest
@@ -173,6 +176,11 @@ def train_random_forest(X_train, y_train):
     return rf_tuned.best_estimator_
 
 def evaluate_rf_model(model, X_test, y_test):
+    """
+    Evaluate the random forest model on the testing set, using F1 weighted as the evaluaton metric
+
+    Required a trained random forest model in memory
+    """
     y_preds = model.predict(X_test)
     f1_scores = f1_score(y_test, y_preds, average='weighted')
     return f1_scores

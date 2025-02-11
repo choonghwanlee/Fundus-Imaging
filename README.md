@@ -55,11 +55,11 @@ gcloud auth login
 To download data from Google Cloud Storage, use the gsutil command.
 
 ```bash
-gsutil cp gs://aipi540-cv/classification/trainLabels.csv ./trainLabels.csv
+gsutil -m cp -r gs://aipi540-cv/classification/trainLabels.csv ./trainLabels.csv
 ```
 
 ```bash
-gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
+gsutil -m cp -r gs://aipi540-cv/classification/resized_train/ ./resized_train/
 ```
 
 ## Data Structure

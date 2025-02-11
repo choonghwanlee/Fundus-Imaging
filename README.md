@@ -76,10 +76,13 @@ To prevent overfitting and ensure better generalization, the following technique
 - **Early Stopping** is implemented to halt training when validation loss doesn't improve for a specified number of epochs.
 - **Adam Optimizer** with learning rate of 0.0001 and weight decay (1e-5) is used for optimization.
 
-## Models
-- **ResNet18**
-- **VGG16**
-- **DenseNet121** 
+## Results 
+| Model Name     | F1 Score     |
+|----------------|--------------|
+| ResNet18       | 0.7056       |
+| VGG16          | 0.8214       |
+| DenseNet121    | 0.7027       |
+
 
 
 

@@ -71,7 +71,8 @@ gsutil -m cp -r gs://aipi540-cv/classification/resized_train/ ./resized_train/
 
 ## Naive Mean Model
 
-**(Yiqing)**
+The Naive Mean Model works by calculating the class distribution from the training data, where the prediction for every image in the test set is assigned to the class with the highest overall frequency.
+The final F1 score is 0.6235
 
 ## Non-Deep Learning Models
 

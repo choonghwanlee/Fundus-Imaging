@@ -130,5 +130,14 @@ To measure this, we use the IDRiD dataset, which is a small, expert-labelled dat
 Preliminary results indicate that our classification algorithm may learn spurious correlations during training, with just a 3% IoU with actual lesions on the IDRiD dataset.
 
 # Application
-
+## Demo Link
 [**(DR-Detect-Model)**](https://huggingface.co/spaces/yiqing111/DR-detect)
+
+## Run Streamlit app locally
+To run the code, run the following command:
+```bash
+streamlit run app.py
+```
+
+Click on the Local URL (http://localhost:8501) to open the Streamlit app in your browser.
+

@@ -18,6 +18,9 @@ This project aims to develop a predictive model for detecting diabetic retinopat
 - **Explainable AI (XAI):** To enhance model interpretability, the project integrates XAI techniques, allowing users to understand how predictions are made, fostering trust and transparency in the decision-making process.
 - **Real-World Application:** A user-friendly web application where users can upload their fundus images and get real-time predictions on the severity of diabetic retinopathy.
 
+## Evaluation Metric: F1 Score
+Due to the class imbalance in our dataset, we chose the F1 score as our evaluation metric. The F1 score is particularly effective in this context because it provides a balance between precision and recall, which is crucial when dealing with imbalanced data. By optimizing for F1 score, we ensure that the model is not biased toward the majority class and can effectively classify samples from all classes, providing a more reliable performance measure in the presence of data imbalance.
+
 
 
 # 1. Running Instruction
@@ -54,13 +57,13 @@ gsutil cp gs://aipi540-cv/classification/resized_train/ ./resized_train/
 - `resized_train/`: Directory containing resized images in `.jpeg` format.
 
 # Approaches
-## 1. Naive Mean Model
+## Naive Mean Model
 **(Yiqing)**
 
-## 2. Non-Deep Learning Models
+## Non-Deep Learning Models
 **(Jason)**
 
-## 3. Deep Learning Models
+## Deep Learning Models
 
 ## Data Sourcing and Processing Pipeline
 - **Load Labels**: Reads `trainLabels.csv` and maps labels to corresponding categories.
@@ -83,6 +86,10 @@ To prevent overfitting and ensure better generalization, the following technique
 | VGG16          | 0.8214       |
 | DenseNet121    | 0.7027       |
 
+# Explainable AI
+**(Jason)**
 
+# Application
+**(Yiqing pastes the link)**
 
 

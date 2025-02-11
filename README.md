@@ -35,7 +35,7 @@ Due to the class imbalance in our dataset, we chose the F1 score as our evaluati
 # 2. Data Downloading from Google Cloud Storage (GCS)
 ## Prerequisites
 Before you begin, make sure you have
-**Google Cloud SDK** installed. If not, [download it here](https://cloud.google.com/sdk/docs/install).
+**Google Cloud SDK** installed. If not, [download it here](https://i.imghippo.com/files/xEgx2063zzk.png).
 
 ## Step 1: Authenticate with Google Cloud
 To authenticate your Google Cloud account, run the following command:

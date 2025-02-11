@@ -27,7 +27,7 @@ class ModelHandler:
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.3205, 0.2244, 0.1613], 
-                               std=[0.2996,0.2158, 0.1711]) ## I think this is out of date slightly? at least with what VGG uses
+                               std=[0.2996,0.2158, 0.1711])
         ])
 
     

@@ -6,11 +6,12 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from PIL import Image
 
-# Define dataset
+# Define dataset file paths
 csv_path = "trainLabels.csv"
 image_folder = "resized_train"
 
 def load_labels():
+    '''Load the labels from the csv file and map them to categories'''
     df = pd.read_csv(csv_path)
     label_mapping = {0: "Normal", 1: "Mild Diabetic Retinopathy", 2: "Mild Diabetic Retinopathy", 
                      3: "Severe Diabetic Retinopathy", 4: "Severe Diabetic Retinopathy"}
@@ -20,30 +21,31 @@ def load_labels():
     return df
 
 class LocalImageDataset(Dataset):
+    '''Custom PyTorch dataset for loading local images and their corresponding labels.'''
+
     def __init__(self, df, folder_path, transform=None):
         self.df = df
         self.folder_path = folder_path
         self.transform = transform
-        self.counter = 0
+        
 
     def __len__(self):
         return len(self.df)
     
     def __getitem__(self, idx):
+        '''Load and return an image and its corresponding label.'''
         row = self.df.iloc[idx]
         image_name = row['image']
         label = int(row['category_id'])
         image = Image.open(f"{self.folder_path}/{image_name}.jpeg").convert("RGB")
+
         if self.transform:
             image = self.transform(image)
-        '''
-        if self.counter < 10:
-            print(f"Image: {image_name}, Label: {label}")
-            self.counter += 1
-        '''
+        
         return image, torch.tensor(label, dtype=torch.long)
     
 def compute_mean_std(dataset):
+    '''Compute the mean and standard deviation of the dataset for normalization.'''
     loader = DataLoader(dataset, batch_size=32, shuffle=False, num_workers=4)
     mean = torch.zeros(3)
     std = torch.zeros(3)
@@ -51,7 +53,8 @@ def compute_mean_std(dataset):
     
     for images, _ in loader:
         batch_samples = images.size(0)
-        images = images.view(batch_samples, 3, -1)
+        images = images.view(batch_samples, 3, -1) # Flatten image pixels
+
         mean += images.mean(dim=[0, 2]) * batch_samples
         std += images.std(dim=[0, 2]) * batch_samples
         num_samples += batch_samples
@@ -61,6 +64,7 @@ def compute_mean_std(dataset):
     return mean, std
 
 def get_dataloaders(batch_size=32, train_ratio=0.8, val_ratio=0.1, num_workers=4, pin_memory=False):
+    '''Load the dataset and split it into training, validation, and test sets.'''
     df = load_labels()
     dataset = LocalImageDataset(df, image_folder, transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()]))
     mean, std = compute_mean_std(dataset)
@@ -82,5 +86,6 @@ def get_dataloaders(batch_size=32, train_ratio=0.8, val_ratio=0.1, num_workers=4
 
 if __name__ == "__main__":
     train_loader, val_loader, test_loader = get_dataloaders()
+    # Get a batch of training images and labels
     images, labels = next(iter(train_loader))
     print(f"Train batch shape: {images.shape}, Labels: {labels}")

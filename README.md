@@ -13,7 +13,7 @@ The project involves image classification across three levels of labels:
 ## Key Features
 
 - **Model Approaches:**
-  - **Naive Mean Model:** A basic baseline model that uses statistical averages for prediction.
+  - **Naive Mean Model:** A simple baseline model that calculates the class distribution of the dataset, assuming all predictions follow this natural distribution. The model selects the most frequent class as its prediction, evaluates its performance using the F1 score.
   - **Non-Deep Learning Models:** A traditional machine learning model that doesn't rely on deep learning techniques. We use a combination of feature extraction using GLCM and a Random Forest model to train our model.
   - **Deep Learning Models:**
     - **VGG:** A convolutional neural network (CNN) with a simple architecture, known for its deep structure and great accuracy in image classification.
@@ -136,4 +136,16 @@ Preliminary results indicate that our classification algorithm may learn spuriou
 
 # Application
 
+## Demo Link
+
 [**(DR-Detect-Model)**](https://huggingface.co/spaces/yiqing111/DR-detect)
+
+## Run Streamlit app locally
+
+To run the code, run the following command:
+
+```bash
+streamlit run app.py
+```
+
+Click on the Local URL (http://localhost:8501) to open the Streamlit app in your browser.
